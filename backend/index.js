@@ -61,7 +61,6 @@
 // });
 
 
-
 const connectToMongo = require('./db');
 const express = require('express');
 const auth = require('./routes/auth');
@@ -71,18 +70,15 @@ require('dotenv').config();
 
 const app = express();
 
-// ✅ Allow only your frontend URL
+// Corrected CORS setup
 const corsOptions = {
-  origin: "https://r-notebook-h4p7.vercel.app/login", 
-  methods: ["GET","POST","PUT","DELETE","OPTIONS"], // include OPTIONS
+  origin: "https://r-notebook-h4p7.vercel.app",
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
   credentials: true,
-  allowedHeaders: ["Content-Type","Authorization"] // allow headers sent by frontend
+  allowedHeaders: ["Content-Type","Authorization"]
 };
 
-// Enable CORS
 app.use(cors(corsOptions));
-
-// Handle preflight requests
 app.options("*", cors(corsOptions));
 
 // Connect to MongoDB
@@ -91,7 +87,7 @@ connectToMongo();
 // Middleware to parse JSON
 app.use(express.json());
 
-// Available routes
+// Routes
 app.use('/api/auth', auth);
 app.use('/api/notes', notes);
 
