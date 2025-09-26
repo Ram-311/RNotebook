@@ -27,26 +27,26 @@
 // });
 
 
-
 const connectToMongo = require('./db');
 const express = require('express');
 const auth = require('./routes/auth');
 const notes = require('./routes/notes');
 const cors = require('cors');
-require('dotenv').config(); // Load .env variables
+require('dotenv').config();
 
 const app = express();
 
-// ✅ Allow frontend (Vercel) to access backend (Render)
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "*", // example: https://your-frontend.vercel.app
+// ✅ Allow only your frontend URL
+const corsOptions = {
+  origin: "https://r-notebook-h4p7.vercel.app", 
+  methods: "GET,POST,PUT,DELETE",
   credentials: true
-}));
+};
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 connectToMongo();
 
-// Use environment variable for PORT (Render provides it), fallback to 5000 locally
 const port = process.env.PORT || 5000;
 
 // Middleware to parse JSON
@@ -56,13 +56,7 @@ app.use(express.json());
 app.use('/api/auth', auth);
 app.use('/api/notes', notes);
 
-// ✅ Default route for testing
-app.get("/", (req, res) => {
-  res.send("RNotebook Backend is running 🚀");
-});
-
-// Start server
-app.listen(port, () => { 
+app.listen(port, () => {
   console.log(`RNotebook backend listening at http://localhost:${port}`);
 });
 
