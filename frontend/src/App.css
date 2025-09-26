@@ -1,7 +1,9 @@
+/* App.css */
+
 .App {
   text-align: center;
 
-  /* Prevent text auto-scaling in iOS Safari */
+  /* Prevent text auto-scaling in Safari/iOS */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -21,8 +23,9 @@
   background-color: #282c34;
   min-height: 100vh;
 
-  /* For height stretching across browsers */
-  height: -webkit-fill-available;
+  /* Replace non-standard height: stretch */
+  height: -webkit-fill-available; /* WebKit browsers */
+  height: 100%;                   /* fallback */
 
   display: flex;
   flex-direction: column;
@@ -31,7 +34,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 
-  /* Optional: smooth backdrop filter for future use */
+  /* Backdrop filter for blur/glass effects */
   -webkit-backdrop-filter: blur(0);
   backdrop-filter: blur(0);
 
@@ -53,7 +56,7 @@
   }
 }
 
-/* Optional scrollbar styling */
+/* Scrollbar styling */
 body::-webkit-scrollbar {
   width: 8px;
 }

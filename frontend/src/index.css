@@ -1,3 +1,5 @@
+/* index.css */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,6 +13,10 @@ body {
   /* Prevent text scaling in Safari/iOS */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+
+  /* Prevent user selection globally */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 code {
@@ -18,14 +24,8 @@ code {
     monospace;
 }
 
-/* Optional: smooth backdrop filter support */
+/* Optional backdrop filter support globally */
 * {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-}
-
-/* Prevent user selection on body */
-body {
-  -webkit-user-select: none;
-  user-select: none;
 }
