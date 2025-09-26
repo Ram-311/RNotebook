@@ -1,21 +1,50 @@
+// const mongoose = require('mongoose');
+// require('dotenv').config(); // Load .env variables
+
+// const mongoURI = process.env.MONGO_URI; // Read from .env
+
+// const connectToMongo = async () => {
+//   try {
+//     await mongoose.connect(mongoURI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     });
+//     console.log("Connected to MongoDB successfully");
+//   } catch (error) {
+//     console.error("Error connecting to MongoDB:", error);
+//   }
+// };
+
+// module.exports = connectToMongo;
+
+
+// db.js
 const mongoose = require('mongoose');
 require('dotenv').config(); // Load .env variables
 
-const mongoURI = process.env.MONGO_URI; // Read from .env
+// Read MongoDB URI from environment
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/myLocalDB';
 
+// Function to connect to MongoDB
 const connectToMongo = async () => {
   try {
     await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
+      serverSelectionTimeoutMS: 30000, // optional: increase timeout for slow connections
     });
-    console.log("Connected to MongoDB successfully");
+    console.log("✅ Connected to MongoDB successfully");
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    console.error("❌ Error connecting to MongoDB:", error);
+    process.exit(1); // Exit process if DB connection fails
   }
 };
 
+// Optional: Log when MongoDB disconnects
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️ MongoDB disconnected!');
+});
+
 module.exports = connectToMongo;
+
 
 
 
