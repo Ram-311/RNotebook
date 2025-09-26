@@ -27,6 +27,41 @@
 // });
 
 
+// const connectToMongo = require('./db');
+// const express = require('express');
+// const auth = require('./routes/auth');
+// const notes = require('./routes/notes');
+// const cors = require('cors');
+// require('dotenv').config();
+
+// const app = express();
+
+// // ✅ Allow only your frontend URL
+// const corsOptions = {
+//   origin: "https://r-notebook-h4p7.vercel.app", 
+//   methods: "GET,POST,PUT,DELETE",
+//   credentials: true
+// };
+// app.use(cors(corsOptions));
+
+// // Connect to MongoDB
+// connectToMongo();
+
+// const port = process.env.PORT || 5000;
+
+// // Middleware to parse JSON
+// app.use(express.json());
+
+// // Available routes
+// app.use('/api/auth', auth);
+// app.use('/api/notes', notes);
+
+// app.listen(port, () => {
+//   console.log(`RNotebook backend listening at http://localhost:${port}`);
+// });
+
+
+
 const connectToMongo = require('./db');
 const express = require('express');
 const auth = require('./routes/auth');
@@ -39,15 +74,19 @@ const app = express();
 // ✅ Allow only your frontend URL
 const corsOptions = {
   origin: "https://r-notebook-h4p7.vercel.app", 
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"], // include OPTIONS
+  credentials: true,
+  allowedHeaders: ["Content-Type","Authorization"] // allow headers sent by frontend
 };
+
+// Enable CORS
 app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options("*", cors(corsOptions));
 
 // Connect to MongoDB
 connectToMongo();
-
-const port = process.env.PORT || 5000;
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -56,10 +95,10 @@ app.use(express.json());
 app.use('/api/auth', auth);
 app.use('/api/notes', notes);
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`RNotebook backend listening at http://localhost:${port}`);
 });
-
 
 
 // index.js
