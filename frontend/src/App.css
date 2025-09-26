@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+
+  /* Prevent text auto-scaling in iOS Safari */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .App-logo {
@@ -16,12 +20,24 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+
+  /* For height stretching across browsers */
+  height: -webkit-fill-available;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
+  /* Optional: smooth backdrop filter for future use */
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .App-link {
@@ -35,4 +51,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Optional scrollbar styling */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+body {
+  scrollbar-width: thin; /* Firefox */
 }
