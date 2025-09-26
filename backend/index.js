@@ -73,7 +73,7 @@ const app = express();
 
 // ✅ Allow only your frontend URL
 const corsOptions = {
-  origin: "https://r-notebook-h4p7.vercel.app", 
+  origin: "https://r-notebook-h4p7.vercel.app/login", 
   methods: ["GET","POST","PUT","DELETE","OPTIONS"], // include OPTIONS
   credentials: true,
   allowedHeaders: ["Content-Type","Authorization"] // allow headers sent by frontend
