@@ -1,20 +1,17 @@
-/* index.css */
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 
-  /* Font smoothing */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Prevent text scaling in Safari/iOS */
+  /* Text scaling */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 
-  /* Prevent user selection globally */
+  /* Prevent selection */
   -webkit-user-select: none;
   user-select: none;
 }
@@ -24,7 +21,7 @@ code {
     monospace;
 }
 
-/* Optional backdrop filter support globally */
+/* Optional backdrop filter support */
 * {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
