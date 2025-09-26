@@ -4,35 +4,35 @@ import { useNavigate } from 'react-router-dom';
 const Signup = (props) => {
     const [credentials,setCredentials] = useState({name:"",email:"",password:"",cpassword:""})
     let navigate = useNavigate();
-    const handleSubmit= async(e)=>
-    { e.preventDefault();
-      const  {name,email,password} = credentials
-      if(credentials.password!==credentials.cpassword)
-      {
-        props.showAlert("passwords do not match","danger");
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const { name, email, password } = credentials;
+    
+      if (credentials.password !== credentials.cpassword) {
+        props.showAlert("Passwords do not match", "danger");
         return;
       }
-        const response = await fetch("http://localhost:5000/api/auth/createuser", {
-            method: "POST",
-            headers:{
-              'Content-Type':'application/json'
-            },
-            body: JSON.stringify({name,email,password})
-          });
-          const json = await response.json();
-          console.log(json);
-          if(json.success)
-          {
-            // Save the auth token and redirect
-            localStorage.setItem('token',json.authtoken);
-            navigate("/");
-            props.showAlert("Account created successfully ","success")
-          }
-          else{
-           props.showAlert("invalid credentials","danger");
-          }
-       
-    }
+    
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/createuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+    
+      const json = await response.json();
+      console.log(json);
+    
+      if (json.success) {
+        localStorage.setItem("token", json.authtoken);
+        navigate("/");
+        props.showAlert("Account created successfully", "success");
+      } else {
+        props.showAlert("Invalid credentials", "danger");
+      }
+    };
+    
     const onChange =(e)=>
         {
             setCredentials({...credentials,[e.target.name]: e.target.value})

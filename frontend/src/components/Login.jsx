@@ -8,30 +8,33 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: credentials.email, password: credentials.password })
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+        }),
       });
-      
+  
       const json = await response.json();
       console.log(json);
-
+  
       if (json.success) {
-        // Save the auth token and redirect
-        localStorage.setItem('token', json.authtoken);
-        props.showAlert("Logged in successfully","success");
+        localStorage.setItem("token", json.authtoken);
+        props.showAlert("Logged in successfully", "success");
         navigate("/");
       } else {
-        props.showAlert("Invalid credentials","danger")
+        props.showAlert("Invalid credentials", "danger");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred. Please try again later.");
     }
-  }
+  };
+  
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
