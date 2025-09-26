@@ -42,20 +42,43 @@ const Login = (props) => {
 
   return (
     <div className="mt-3">
-      <h2>Login to continue to iNotebook </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input type="email" className="form-control" onChange={onChange} value={credentials.email} id="email" name="email" aria-describedby="emailHelp" />
-          <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+    <h2>Login to continue to iNotebook</h2>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">Email address</label>
+        <input
+          type="email"
+          className="form-control"
+          onChange={onChange}
+          value={credentials.email}
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          aria-describedby="emailHelp"
+          required
+        />
+        <div id="emailHelp" className="form-text">
+          We'll never share your email with anyone else.
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" onChange={onChange} value={credentials.password} id="password" name="password" />
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
-    </div>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">Password</label>
+        <input
+          type="password"
+          className="form-control"
+          onChange={onChange}
+          value={credentials.password}
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          minLength={5}
+          required
+        />
+      </div>
+      <button type="submit" className="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
   );
 }
 
