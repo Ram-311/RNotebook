@@ -128,14 +128,7 @@ app.use('/api/auth', auth);
 app.use('/api/notes', notes);
 
 const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`RNotebook backend listening at http://localhost:${PORT}`);
+});
 
-// Only listen locally (not serverless)
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`iNotebook backend running locally at http://localhost:${PORT}`);
-  });
-}
-
-// Export for serverless deployment
-module.exports = app;
-module.exports.handler = serverless(app);
